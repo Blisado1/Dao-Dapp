@@ -1,4 +1,16 @@
+# DAO-DAPP
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+This DAO contract:
+
+- 1.  Collects investors money (ether) & allocate shares
+- 2.  Keep track of investor contributions with shares
+- 3.  Allow investors to transfer shares
+- 4.  allow investment proposals to be created and voted
+- 5.  execute successful investment proposals (i.e send money)
+
+On deployment Contract has been set to 50 people, 365 days of contributions, 24 hours for voting
 
 ## Available Scripts
 
