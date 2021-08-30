@@ -4,14 +4,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This DAO contract:
 
-- 1.  Collects investors money (cUSD) & allocate shares
-- 2.  Keep track of investor contributions with shares
-- 3.  Allow investors to transfer shares
-- 4.  Allow investment proposals to be created and voted
-- 5.  Execute successful investment proposals (i.e send money)
-- 6.  The number of votes an investor has is equivalent to the number of shares the investor has.
+- Collects investors money (cUSD) & allocate shares
+- Keep track of investor contributions with shares
+- Allow investors to transfer shares
+- Allow investment proposals to be created and voted
+- Execute successful investment proposals (i.e send money)
+- The number of votes an investor has is equivalent to the number of shares the investor has.
 
-On deployment the contract has been set to 50 people, 365 days of contributions, 24 hours for voting
+On deployment the contract has been set to 50 people, 365 days of contributions, 24 hours for voting.
+
+[DAPP LINK](https://blisado1.github.io/Dao-Dapp/)
 
 # Install
 
