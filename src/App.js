@@ -152,26 +152,31 @@ function App() {
     notification("⌛ Waiting for payment approval...")
     e.preventDefault();
     const amount = new BigNumber(e.target.elements[0].value).shiftedBy(ERC20_DECIMALS);
+    // Check user approve transaction or not
+    let isApprove = true;
     try {
       await approve(amount);
     } catch (error) {
+      isApprove = false;
       notification(`⚠️ ${error}`)
     }
-    notification(`⌛ Awaiting Contribution...`)
-    try {
-      await contract.methods
-        .contribute(amount)
-        .send({ from: accounts[0] });
-      notification(`🎉 You are now a Shareholder.`);
-      await updateShares();
-    } catch (error) {
-      notification(`⚠️ ${error}`);
+    if (isApprove){
+      notification(`⌛ Awaiting Contribution...`)
+      try {
+        await contract.methods
+          .contribute(amount)
+          .send({ from: accounts[0] });
+        notification(`🎉 You are now a Shareholder.`);
+        await updateShares();
+      } catch (error) {
+        notification(`⚠️ ${error}`);
+      }
+      setInputs({
+        ...inputs,
+        contributeAmount: "",
+      });
+      setTimeout(notificationOff, 3000);
     }
-    setInputs({
-      ...inputs,
-      contributeAmount: "",
-    });
-    setTimeout(notificationOff, 3000);
   };
 
   async function redeemShares(e) {
