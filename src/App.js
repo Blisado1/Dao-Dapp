@@ -19,6 +19,7 @@ function App() {
   const [admin, setAdmin] = useState(undefined);
   const [shares, setShares] = useState(undefined);
   const [proposals, setProposals] = useState([]);
+  const [balance, setBalance] = useState(0)
   const [inputs, setInputs] = useState({
     withdrawAmount: "",
     withdrawTo: "",
@@ -43,7 +44,10 @@ function App() {
       const contract = new kit.web3.eth.Contract(
         DaoAbi, DaoContractAddress
       );
-      
+
+      const balance = await kit.getTotalBalance(accounts[0]);
+      const USDBalance = balance.cUSD.shiftedBy(-ERC20_DECIMALS).toFixed(2);
+        
       const admin = await contract.methods
         .admin()
         .call();
@@ -52,6 +56,7 @@ function App() {
       setAccounts(accounts);
       setContract(contract);
       setAdmin(admin);
+      setBalance(USDBalance)
     }
     init();
     window.celo.on('accountsChanged', accounts => {
@@ -78,7 +83,7 @@ function App() {
     // eslint-disable-next-line
   }, [accounts, contract, web3, admin]);
 
-  
+ 
   async function approve(_price) {
     const cUSDContract = new kit.web3.eth.Contract(Erc20Abi, cUSDContractAddress);
     const result = await cUSDContract.methods
@@ -296,6 +301,7 @@ function App() {
       <h1 className="text-center">DAO</h1>
       <p>Account: {accounts[0]}</p>
       <p>Shares: {shares}</p>
+      <p>Balance: {balance}</p>
 
       {accounts[0].toLowerCase() === admin.toLowerCase() ? (
         <>
