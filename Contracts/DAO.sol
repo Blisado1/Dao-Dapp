@@ -27,7 +27,71 @@ interface IERC20Token {
     );
 }
 
+library SafeMath {
+  /**
+  * @dev Multiplies two numbers, reverts on overflow.
+  */
+  function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+    // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
+    // benefit is lost if 'b' is also tested.
+    // See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522
+    if (a == 0) {
+      return 0;
+    }
+
+    uint256 c = a * b;
+    require(c / a == b);
+    return c;
+
+  }
+
+  /**
+  * @dev Integer division of two numbers truncating the quotient, reverts on division by zero.
+  */
+  function div(uint256 a, uint256 b) internal pure returns (uint256) {
+    require(b > 0); // Solidity only automatically asserts when dividing by 0
+    uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+    return c;
+
+  }
+
+  /**
+  * @dev Subtracts two numbers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+  */
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    require(b <= a);
+    uint256 c = a - b;
+    return c;
+  }
+
+  /**
+  * @dev Adds two numbers, reverts on overflow.
+  */
+  function add(uint256 a, uint256 b) internal pure returns (uint256) {
+    uint256 c = a + b;
+    require(c >= a);
+    return c;
+  }
+
+  /**
+  * @dev Divides two numbers and returns the remainder (unsigned integer modulo),
+  * reverts when dividing by zero.
+  */
+  function mod(uint256 a, uint256 b) internal pure returns (uint256) {
+    require(b != 0);
+    return a % b;
+  }
+
+}
+
+
+
 contract DAO {
+    // implement the safe math library
+    using SafeMath for uint256; 
+    
+    // struct to hold proposals
     struct Proposal {
         uint256 id;
         string name;
@@ -38,6 +102,7 @@ contract DAO {
         bool executed;
     }
 
+// declare mappings
     mapping(address => bool) public investors;
     mapping(address => uint256) public shares;
     mapping(address => mapping(uint256 => bool)) public votes;
@@ -50,6 +115,7 @@ contract DAO {
     uint256 public quorum;
     address public admin;
 
+// contract address for cusd
     address internal cUsdTokenAddress =
         0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
 
@@ -73,6 +139,8 @@ contract DAO {
         payable
         contributionTimeExpired
     {
+        
+        require(_amount > 0, "Please enter an amount greater than zero");
         require(
             IERC20Token(cUsdTokenAddress).transferFrom(
                 msg.sender,
@@ -82,23 +150,23 @@ contract DAO {
             "Transfer failed"
         );
         investors[msg.sender] = true;
-        shares[msg.sender] += _amount;
-        totalShares += _amount;
-        availableFunds += _amount;
+        shares[msg.sender] = shares[msg.sender].add(_amount) ;
+        totalShares = totalShares.add(_amount) ;
+        availableFunds = availableFunds.add(_amount) ;
     }
 
     function redeemShares(uint256 _amount) external {
         require(shares[msg.sender] >= _amount, "not enough shares");
         require(availableFunds >= _amount, "not enough available funds");
         shares[msg.sender] -= _amount;
-        availableFunds -= _amount;
+        availableFunds = availableFunds.add(_amount) ;
         IERC20Token(cUsdTokenAddress).transfer(payable(msg.sender), _amount);
     }
 
     function transferShares(uint256 amount, address to) external {
         require(shares[msg.sender] >= amount, "not enough shares");
-        shares[msg.sender] -= amount;
-        shares[to] += amount;
+        shares[msg.sender] = shares[msg.sender].sub(amount) ;
+        shares[to] = shares[to].add(amount) ;
         investors[to] = true;
     }
 
@@ -117,7 +185,7 @@ contract DAO {
             block.timestamp + voteTime,
             false
         );
-        availableFunds -= amount;
+        availableFunds =  availableFunds.sub(amount);
         nextProposalId++;
     }
 
@@ -132,7 +200,7 @@ contract DAO {
             "can only vote until proposal end date"
         );
         votes[msg.sender][proposalId] = true;
-        proposal.votes += shares[msg.sender];
+        proposal.votes = proposal.votes .add( shares[msg.sender]);
     }
 
     function executeProposal(uint256 proposalId) external onlyAdmin {
@@ -161,7 +229,7 @@ contract DAO {
 
     function _transferFunds(uint256 amount, address payable to) internal {
         require(amount <= availableFunds, "not enough availableFunds");
-        availableFunds -= amount;
+        availableFunds = availableFunds.sub(amount);
         IERC20Token(cUsdTokenAddress).transfer(to, amount);
     }
 
