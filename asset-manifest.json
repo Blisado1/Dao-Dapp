@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/Dao-Dapp/static/js/main.2025903f.chunk.js",
-    "main.js.map": "/Dao-Dapp/static/js/main.2025903f.chunk.js.map",
+    "main.js": "/Dao-Dapp/static/js/main.bfb22639.chunk.js",
+    "main.js.map": "/Dao-Dapp/static/js/main.bfb22639.chunk.js.map",
     "runtime-main.js": "/Dao-Dapp/static/js/runtime-main.8edfbcd0.js",
     "runtime-main.js.map": "/Dao-Dapp/static/js/runtime-main.8edfbcd0.js.map",
     "static/css/2.4ca6334e.chunk.css": "/Dao-Dapp/static/css/2.4ca6334e.chunk.css",
-    "static/js/2.1e63f505.chunk.js": "/Dao-Dapp/static/js/2.1e63f505.chunk.js",
-    "static/js/2.1e63f505.chunk.js.map": "/Dao-Dapp/static/js/2.1e63f505.chunk.js.map",
+    "static/js/2.7417b58e.chunk.js": "/Dao-Dapp/static/js/2.7417b58e.chunk.js",
+    "static/js/2.7417b58e.chunk.js.map": "/Dao-Dapp/static/js/2.7417b58e.chunk.js.map",
     "index.html": "/Dao-Dapp/index.html",
-    "precache-manifest.a843a3a5401df024124ab6982ba22c90.js": "/Dao-Dapp/precache-manifest.a843a3a5401df024124ab6982ba22c90.js",
+    "precache-manifest.4708bccce1c9a08e21f2b1de2c811b1c.js": "/Dao-Dapp/precache-manifest.4708bccce1c9a08e21f2b1de2c811b1c.js",
     "service-worker.js": "/Dao-Dapp/service-worker.js",
     "static/css/2.4ca6334e.chunk.css.map": "/Dao-Dapp/static/css/2.4ca6334e.chunk.css.map",
-    "static/js/2.1e63f505.chunk.js.LICENSE.txt": "/Dao-Dapp/static/js/2.1e63f505.chunk.js.LICENSE.txt"
+    "static/js/2.7417b58e.chunk.js.LICENSE.txt": "/Dao-Dapp/static/js/2.7417b58e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8edfbcd0.js",
     "static/css/2.4ca6334e.chunk.css",
-    "static/js/2.1e63f505.chunk.js",
-    "static/js/main.2025903f.chunk.js"
+    "static/js/2.7417b58e.chunk.js",
+    "static/js/main.bfb22639.chunk.js"
   ]
 }
