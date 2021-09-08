@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Disclaimer
+This is a test dapp and should not be used in production.
+
 This DAO contract:
 
 - Collects investors money (cUSD) & allocate shares
