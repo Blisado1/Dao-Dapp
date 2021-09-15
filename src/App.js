@@ -154,13 +154,16 @@ function App() {
   };
 
   async function contribute(e) {
+    // Error was being generated from here
     notification("⌛ Waiting for payment approval...")
     e.preventDefault();
     const amount = new BigNumber(e.target.elements[0].value).shiftedBy(ERC20_DECIMALS);
+    // Converting the amount from type Bignumber to string
+    const _amount = amount.toString();
     // Check user approve transaction or not
     let isApprove = true;
     try {
-      await approve(amount);
+      await approve(_amount);
     } catch (error) {
       isApprove = false;
       notification(`⚠️ ${error}`)
@@ -169,7 +172,7 @@ function App() {
       notification(`⌛ Awaiting Contribution...`)
       try {
         await contract.methods
-          .contribute(amount)
+          .contribute(_amount)
           .send({ from: accounts[0] });
         notification(`🎉 You are now a Shareholder.`);
         await updateShares();
@@ -244,15 +247,18 @@ function App() {
   };
 
   async function createProposal(e) {
+    // Another Possible Error
     notification(`⌛ Creating your Proposal`);
     e.preventDefault();
     const name = e.target.elements[0].value;
     const amount = new BigNumber(e.target.elements[1].value).shiftedBy(ERC20_DECIMALS);
+    // Converting the amount to string
+    const _amount = amount.toString();
     const recipient = e.target.elements[2].value;
 
     try {
       await contract.methods
-        .createProposal(name, amount, recipient)
+        .createProposal(name, _amount, recipient)
         .send({from: accounts[0]});
       notification(`🎉 Proposal Creation Successful`);
 
