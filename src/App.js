@@ -312,7 +312,7 @@ function App() {
       <h1 className="text-center">DAO</h1>
       <p>Account: {accounts[0]}</p>
       <p>Shares: {shares}</p>
-      <p>Balance: {balance}</p>
+      <p>Wallet Balance: {balance}</p>
 
       {accounts[0].toLowerCase() === admin.toLowerCase() ? (
         <>
