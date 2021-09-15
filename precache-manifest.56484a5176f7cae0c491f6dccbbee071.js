@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "414a36a82138b7044e6f8e412ae640fb",
+    "revision": "115fb9f6fe257f23a59df608f41f6b89",
     "url": "/Dao-Dapp/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Dao-Dapp/static/js/2.7417b58e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "87555cc82c2f4d5c1732",
-    "url": "/Dao-Dapp/static/js/main.bfb22639.chunk.js"
+    "revision": "fd1d3b488e173bd8c254",
+    "url": "/Dao-Dapp/static/js/main.ab15b20b.chunk.js"
   },
   {
     "revision": "fb8c54dbf53c50b11f34",
